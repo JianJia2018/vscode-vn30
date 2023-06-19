@@ -1,0 +1,56 @@
+{
+  "name": "vn30",
+  "displayName": "vn30",
+  "description": "vn30",
+  "version": "0.0.1",
+  "publisher": "jian",
+  "engines": {
+    "vscode": "^1.57.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "VN30",
+      "properties": {
+        "VN30.dateFormat": {
+          "type": "string",
+          "default": "14:56",
+          "markdownDescription": "提示时间"
+        },
+        "VN30.openUrl": {
+          "type": "string",
+          "default": "https://cn.investing.com/indices/vn-30-technical?period=month",
+          "markdownDescription": "状态栏网址配置"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "vn30.VN30",
+        "title": "VN30"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.57.0",
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "14.x",
+    "eslint": "^7.27.0",
+    "glob": "^7.1.7",
+    "mocha": "^8.4.0",
+    "typescript": "^4.3.2",
+    "vscode-test": "^1.5.2"
+  }
+}
