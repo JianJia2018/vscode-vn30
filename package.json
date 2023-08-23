@@ -2,7 +2,7 @@
   "name": "vn30",
   "displayName": "vn30",
   "description": "vn30",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "jian",
   "engines": {
     "vscode": "^1.57.0"
@@ -38,6 +38,7 @@
     ]
   },
   "scripts": {
+    "build": "vsce package",
     "lint": "eslint .",
     "pretest": "npm run lint",
     "test": "node ./test/runTest.js"

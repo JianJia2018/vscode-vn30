@@ -9,6 +9,9 @@ console.log("dateFormat: ", dateFormat)
 const url = vscode.workspace.getConfiguration("VN30").get("openUrl") || "https://cn.investing.com/indices/vn-30-technical?period=month" // 英为财经
 
 const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left)
+
+let marketIndex = 0 // 大盘点数
+
 /**
  * @param {vscode.ExtensionContext} context
  */
@@ -21,7 +24,16 @@ function activate(context) {
 
   // 调用函数显示状态栏消息
   setInterval(() => {
-    getValue(false)
+    // 获取当前时间
+    const currentTime = new Date()
+    const currentHour = currentTime.getHours()
+    if (currentHour >= 10 && currentHour <= 16) {
+      getValue(false)
+    } else {
+      const message = `VN30 (0%)  指数: ${marketIndex}`
+      statusBarItem.text = message
+      statusBarItem.tooltip = message
+    }
   }, 10000)
 }
 
@@ -53,6 +65,7 @@ function getValue(isMessage = true) {
       resp.on("end", () => {
         let lines = JSON.parse(data).data.candle["VNI30.OTC"].lines[0]
         let num = lines[1]
+        marketIndex = num
         let value = lines[6].toFixed(2)
 
         let time = new Date().getHours() + ":" + new Date().getMinutes()
